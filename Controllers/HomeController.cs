@@ -2,30 +2,42 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Tarea_3.Models;
 
-namespace Tarea_3.Controllers;
-
-public class HomeController : Controller
+namespace Tarea_3.Controllers
 {
-    private readonly ILogger<HomeController> _logger;
-
-    public HomeController(ILogger<HomeController> logger)
+    public class MascotasController : Controller
     {
-        _logger = logger;
-    }
+        private readonly ILogger<MascotasController> _logger;
 
-    public IActionResult Index()
-    {
-        return View();
-    }
+        public MascotasController(ILogger<MascotasController> logger)
+        {
+            _logger = logger;
+        }
 
-    public IActionResult Privacy()
-    {
-        return View();
-    }
+        // Mostrar el formulario
+        [HttpGet]
+        public IActionResult Registrar()
+        {
+            return View();
+        }
 
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error()
-    {
-        return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        // Procesar el formulario
+        [HttpPost]
+        public IActionResult Registrar(MascotaModel mascota)
+        {
+            if (ModelState.IsValid)
+            {
+                // Aquí podrías guardar la mascota en base de datos
+                ViewBag.Mensaje = $"¡Gracias! La mascota {mascota.Nombre} ha sido registrada.";
+                return View("Confirmacion", mascota);
+            }
+
+            return View(mascota);
+        }
+
+        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
+        public IActionResult Error()
+        {
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
     }
 }
