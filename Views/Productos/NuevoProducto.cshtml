@@ -1,0 +1,83 @@
+@model Tarea_3.Models.ProductoModel
+
+@{
+    ViewData["Title"] = "Registrar Nuevo Producto";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-7 col-lg-6">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="mb-0"><i class="bi bi-bag-plus-fill me-2"></i>Registrar Nuevo Producto</h3>
+                </div>
+                <div class="card-body">
+                    @if (ViewBag.Mensaje != null)
+                    {
+                        <div class="alert alert-success" role="alert">
+                            @ViewBag.Mensaje
+                        </div>
+                    }
+
+                    <form asp-action="NuevoProducto" method="post" class="needs-validation" novalidate>
+                        <div class="mb-3">
+                            <label for="Nombre" class="form-label fw-semibold">Nombre del producto</label>
+                            <input type="text" class="form-control @(ViewData.ModelState["Nombre"]?.Errors.Count > 0 ? "is-invalid" : "")" 
+                                   id="Nombre" name="Nombre" value="@Model?.Nombre" placeholder="Ejemplo: Comida para perros" required />
+                            <div class="invalid-feedback">
+                                @Html.ValidationMessageFor(m => m.Nombre)
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="TipoMascota" class="form-label fw-semibold">Tipo de mascota</label>
+                            <input type="text" class="form-control @(ViewData.ModelState["TipoMascota"]?.Errors.Count > 0 ? "is-invalid" : "")" 
+                                   id="TipoMascota" name="TipoMascota" value="@Model?.TipoMascota" placeholder="Ejemplo: Perro, Gato" required />
+                            <div class="invalid-feedback">
+                                @Html.ValidationMessageFor(m => m.TipoMascota)
+                            </div>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Precio" class="form-label fw-semibold">Precio (S/)</label>
+                            <input type="number" step="0.01" min="0.01" class="form-control @(ViewData.ModelState["Precio"]?.Errors.Count > 0 ? "is-invalid" : "")" 
+                                   id="Precio" name="Precio" value="@Model?.Precio" placeholder="Ejemplo: 45.50" required />
+                            <div class="invalid-feedback">
+                                @Html.ValidationMessageFor(m => m.Precio)
+                            </div>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="Descripcion" class="form-label fw-semibold">Descripción</label>
+                            <textarea class="form-control" id="Descripcion" name="Descripcion" rows="4" placeholder="Opcional: Detalles del producto">@Model?.Descripcion</textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100 shadow-sm">
+                            <i class="bi bi-check-circle me-2"></i>Registrar Producto
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        (() => {
+            'use strict';
+            const forms = document.querySelectorAll('.needs-validation');
+            Array.from(forms).forEach(form => {
+                form.addEventListener('submit', event => {
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                }, false);
+            });
+        })();
+    </script>
+}
