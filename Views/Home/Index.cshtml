@@ -1,8 +1,34 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
-}
+﻿@model Tarea_3.Models.MascotaModel
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<h2>Registro de Mascotas</h2>
+
+<form asp-action="Index" method="post">
+    <div>
+        <label asp-for="Nombre"></label>
+        <input asp-for="Nombre" />
+        <span asp-validation-for="Nombre" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="Tipo"></label>
+        <input asp-for="Tipo" />
+        <span asp-validation-for="Tipo" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="Edad"></label>
+        <input asp-for="Edad" type="number" />
+        <span asp-validation-for="Edad" style="color:red"></span>
+    </div>
+
+    <div>
+        <label asp-for="Raza"></label>
+        <input asp-for="Raza" />
+    </div>
+
+    <button type="submit">Registrar</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
