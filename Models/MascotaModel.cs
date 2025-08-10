@@ -5,14 +5,12 @@ namespace Tarea_3.Models
     public class MascotaModel
     {
         [Required(ErrorMessage = "El nombre es obligatorio")]
-        public string Nombre { get; set; }
+        public required string Nombre { get; set; }
 
         [Required(ErrorMessage = "El tipo es obligatorio")]
-        public string Tipo { get; set; } // Perro, Gato, etc.
+        public required string Tipo { get; set; }
 
-        [Range(0, 30, ErrorMessage = "La edad debe estar entre 0 y 30 años")]
+        [Range(0, 30, ErrorMessage = "La edad debe estar entre 0 y 30")]
         public int Edad { get; set; }
-
-        public string Raza { get; set; }
     }
 }

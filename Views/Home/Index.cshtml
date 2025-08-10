@@ -1,34 +1,35 @@
 ﻿@model Tarea_3.Models.MascotaModel
 
-<h2>Registro de Mascotas</h2>
+@{
+    ViewData["Title"] = "Registro de Mascota";
+}
 
-<form asp-action="Index" method="post">
-    <div>
-        <label asp-for="Nombre"></label>
-        <input asp-for="Nombre" />
-        <span asp-validation-for="Nombre" style="color:red"></span>
-    </div>
+<div class="container mt-4">
+    <h2 class="mb-4 text-center">Registro de Mascota</h2>
 
-    <div>
-        <label asp-for="Tipo"></label>
-        <input asp-for="Tipo" />
-        <span asp-validation-for="Tipo" style="color:red"></span>
-    </div>
+    <form asp-action="Registrar" method="post" class="needs-validation" novalidate>
+        <div class="mb-3">
+            <label asp-for="Nombre" class="form-label"></label>
+            <input asp-for="Nombre" class="form-control" />
+            <span asp-validation-for="Nombre" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label asp-for="Edad"></label>
-        <input asp-for="Edad" type="number" />
-        <span asp-validation-for="Edad" style="color:red"></span>
-    </div>
+        <div class="mb-3">
+            <label asp-for="Tipo" class="form-label"></label>
+            <input asp-for="Tipo" class="form-control" />
+            <span asp-validation-for="Tipo" class="text-danger"></span>
+        </div>
 
-    <div>
-        <label asp-for="Raza"></label>
-        <input asp-for="Raza" />
-    </div>
+        <div class="mb-3">
+            <label asp-for="Edad" class="form-label"></label>
+            <input asp-for="Edad" class="form-control" type="number" />
+            <span asp-validation-for="Edad" class="text-danger"></span>
+        </div>
 
-    <button type="submit">Registrar</button>
-</form>
+        <button type="submit" class="btn btn-primary w-100">Registrar</button>
+    </form>
+</div>
 
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
