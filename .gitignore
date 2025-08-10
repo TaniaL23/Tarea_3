@@ -1,0 +1,27 @@
+# Build folders
+bin/
+obj/
+
+# Visual Studio files
+*.user
+*.suo
+*.vs/
+
+# Rider files
+.idea/
+
+# Compiled binaries
+*.exe
+*.dll
+*.pdb
+
+# Logs
+*.log
+
+# NuGet packages
+*.nupkg
+packages/
+
+# Others
+.vscode/
+*.DS_Store
